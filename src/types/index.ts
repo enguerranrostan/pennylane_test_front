@@ -12,3 +12,9 @@ export type Product = Awaited<
 export type Customer = Awaited<
   ReturnType<OperationMethods['getSearchCustomers']>
 >['data']['customers'][0]
+
+export type Filter = {
+  field: String
+  operator: 'eq' | 'not_eq' | 'lt' | 'lteq' | 'gt' | 'gteq'
+  value: String | Number
+}
