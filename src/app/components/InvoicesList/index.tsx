@@ -4,12 +4,14 @@ import { useEffect, useCallback, useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 
 import InvoiceFilters, {FILTERS_PARAM } from "app/components/InvoiceFilters";
+import FinalizeButton from 'app/components/FinalizeButton'
 
 const InvoicesList = (): React.ReactElement => {
   const api = useApi()
   const [searchParams] = useSearchParams();
 
   const [invoicesList, setInvoicesList] = useState<Invoice[]>([])
+  const [error, setError] = useState<string>();
   
   const filter = searchParams.get(FILTERS_PARAM) || "";
 
@@ -31,6 +33,7 @@ const InvoicesList = (): React.ReactElement => {
   return (
     <div>
       <h1 className='my-3'>Find an invoice or create a new one</h1>
+      {error && <span className="text-danger">{error}</span>}
       <div className='d-flex flex-row align-items-center justify-content-between py-3'>
         <InvoiceFilters/>
         <Link to="/create">Create a new invoice</Link>
@@ -63,7 +66,7 @@ const InvoicesList = (): React.ReactElement => {
            </td>
            <td>{invoice.total}</td>
            <td>{invoice.tax}</td>
-           <td>{invoice.finalized ? 'Yes' : 'No'}</td>
+           <td><FinalizeButton id={invoice.id} finalized={invoice.finalized} onChange={fetchInvoices} onError={setError} /></td>
            <td>{invoice.paid ? 'Yes' : 'No'}</td>
            <td>{invoice.date}</td>
            <td>{invoice.deadline}</td>
