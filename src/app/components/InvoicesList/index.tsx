@@ -53,7 +53,7 @@ const InvoicesList = (): React.ReactElement => {
      <tbody>
        {invoicesList.map((invoice) => (
          <tr key={invoice.id}>
-           <td>{invoice.id}</td>
+           <td><Link to={`/invoice/${invoice.id}`}>{invoice.id}</Link></td>
            <td>
              {invoice.customer?.first_name} {invoice.customer?.last_name}
            </td>
