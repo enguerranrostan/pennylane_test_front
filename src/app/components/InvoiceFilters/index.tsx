@@ -17,8 +17,6 @@ const InvoiceFilters = () => {
   };
 
   return (
-    <div className="py-5">
-      <div className="mb-3">
         <CustomerAutocomplete 
           value={customer} 
           onChange={(newCustomer) => {
@@ -26,8 +24,6 @@ const InvoiceFilters = () => {
             updateSearchParams(newCustomer);
           }}
         />
-      </div>
-    </div>
   );
 };
 

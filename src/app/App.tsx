@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
+import InvoiceForm from './components/InvoiceForm'
 import InvoicesList from './components/InvoicesList'
 import InvoiceShow from './components/InvoiceShow'
 
@@ -10,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/invoice/:id" Component={InvoiceShow} />
           <Route path="/" Component={InvoicesList} />
+          <Route path="/create" Component={InvoiceForm} />
         </Routes>
       </Router>
     </div>

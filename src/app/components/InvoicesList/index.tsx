@@ -1,7 +1,7 @@
 import { useApi } from 'api'
 import { Invoice } from 'types'
 import { useEffect, useCallback, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, Link } from 'react-router-dom'
 
 import InvoiceFilters, {FILTERS_PARAM } from "app/components/InvoiceFilters";
 
@@ -29,8 +29,12 @@ const InvoicesList = (): React.ReactElement => {
   }, [fetchInvoices])
 
   return (
-    <>
-    <InvoiceFilters />
+    <div>
+      <h1 className='my-3'>Find an invoice or create a new one</h1>
+      <div className='d-flex flex-row align-items-center justify-content-between py-3'>
+        <InvoiceFilters/>
+        <Link to="/create">Create a new invoice</Link>
+      </div>
     {invoicesList.length ? 
      <table className="table table-bordered table-striped">
      <thead>
@@ -70,7 +74,7 @@ const InvoicesList = (): React.ReactElement => {
    : 
    <p>There is no invoice for customer this ID</p>
     }
-    </>
+    </div>
   )
 }
 
