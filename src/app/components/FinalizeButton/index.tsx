@@ -21,7 +21,7 @@ const FinalizeButton = ({ id, finalized, onChange, onError }: Props) => {
       }
     
     return (
-        <button disabled={finalized} onClick={finalize}>{finalized ? "finalized" : "finalize"}</button>
+        <button className={`${finalized ? "btn btn-light": "btn btn-outline-secondary"}`} disabled={finalized} onClick={finalize}>{finalized ? "Finalized" : "Finalize"}</button>
     )
 }
 
