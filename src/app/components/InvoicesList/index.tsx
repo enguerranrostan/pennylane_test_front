@@ -3,17 +3,18 @@ import { Invoice } from 'types'
 import { useEffect, useCallback, useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 
-import InvoiceFilters, {FILTERS_PARAM } from "app/components/InvoiceFilters";
+import InvoiceFilters, {FILTERS_PARAM } from "app/components/InvoiceFilters"
+import DeleteInvoiceButton from 'app/components/DeleteInvoiceButton'
 import FinalizeButton from 'app/components/FinalizeButton'
 
 const InvoicesList = (): React.ReactElement => {
   const api = useApi()
-  const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams()
 
   const [invoicesList, setInvoicesList] = useState<Invoice[]>([])
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<string>()
   
-  const filter = searchParams.get(FILTERS_PARAM) || "";
+  const filter = searchParams.get(FILTERS_PARAM) || ""
 
   const queryParams = {
     page: 1,
@@ -29,6 +30,11 @@ const InvoicesList = (): React.ReactElement => {
   useEffect(() => {
     fetchInvoices()
   }, [fetchInvoices])
+
+  const onDelete = (id: number) => {
+    const newInvoiceList = invoicesList.filter(invoice => invoice.id !== id);
+    setInvoicesList(newInvoiceList)
+  }
 
   return (
     <div>
@@ -51,6 +57,7 @@ const InvoicesList = (): React.ReactElement => {
          <th>Paid</th>
          <th>Date</th>
          <th>Deadline</th>
+         <th>Delete</th>
        </tr>
      </thead>
      <tbody>
@@ -70,6 +77,7 @@ const InvoicesList = (): React.ReactElement => {
            <td>{invoice.paid ? 'Yes' : 'No'}</td>
            <td>{invoice.date}</td>
            <td>{invoice.deadline}</td>
+           <td><DeleteInvoiceButton id={invoice.id} finalized={invoice.finalized} onDelete={onDelete} onError={setError} /></td>
          </tr>
        ))}
      </tbody>
