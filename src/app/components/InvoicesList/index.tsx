@@ -41,8 +41,12 @@ const InvoicesList = (): React.ReactElement => {
       <h1 className='my-3'>Find an invoice or create a new one</h1>
       {error && <span className="text-danger">{error}</span>}
       <div className='d-flex flex-row align-items-center justify-content-between py-3'>
-        <InvoiceFilters/>
-        <Link to="/create">Create a new invoice</Link>
+        <div className='flex-grow-1'>
+          <InvoiceFilters/>
+        </div>
+        <div className='flex-grow-1 text-end'>
+          <Link to="/create">Create a new invoice</Link>
+        </div>
       </div>
     {invoicesList.length ? 
      <table className="table table-bordered table-striped">
